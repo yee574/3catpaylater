@@ -1,0 +1,68 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PayLater Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .result {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>PayLater Calculator</h2>
+    <div class="form-group">
+        <label for="purchaseAmount">Purchase Amount (RM):</label>
+        <input type="number" id="purchaseAmount" placeholder="Enter purchase amount">
+    </div>
+    <button onclick="calculateInstallments()">Calculate</button>
+
+    <div class="result" id="result"></div>
+</div>
+
+<script>
+    function calculateInstallments() {
+        const purchaseAmount = parseFloat(document.getElementById('purchaseAmount').value);
+        const handlingFeePercentage = 6;
+        const handlingFee = purchaseAmount * (handlingFeePercentage / 100);
+
+        const firstInstallment = (purchaseAmount * 0.25) + handlingFee;
+        const remainingInstallment = (purchaseAmount * 0.75) / 3;
+
+        document.getElementById('result').innerHTML = `
+            <h3>Installment Breakdown</h3>
+            <p>First Installment (including handling fee): RM ${firstInstallment.toFixed(2)}</p>
+            <p>Remaining Installments (3 times): RM ${remainingInstallment.toFixed(2)}</p>
+        `;
+    }
+</script>
+
+</body>
+</html>
